@@ -36,7 +36,6 @@ public class TuringRobot implements Robot {
             HttpGet httpget = new HttpGet(url);
             BasicHeader header = new BasicHeader("apikey", apiKey);
             httpget.addHeader(header);
-            System.out.println("executing request " + httpget.getURI());
             // 执行get请求.
             CloseableHttpResponse response = httpclient.execute(httpget);
             // 获取响应实体
@@ -51,6 +50,8 @@ public class TuringRobot implements Robot {
                 String jsonRet = EntityUtils.toString(entity);
                 JSONObject jsonObject = JSON.parseObject(jsonRet);
                 String text = jsonObject.getString("text");
+                String msg_url = jsonObject.getString("url");
+                text = msg_url != null ? (text +": \n<a href='"+msg_url+"'>     点击-查看详情 》</a>"): text;
                 if("当前请求调用次数已用尽".equals(text)) {
                     throw new RobotApiEndException("图灵机器人次数用完");
                 }

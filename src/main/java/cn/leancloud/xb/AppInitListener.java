@@ -1,3 +1,4 @@
+/*
 package cn.leancloud.xb;
 
 import javax.servlet.ServletContextEvent;
@@ -46,3 +47,4 @@ public class AppInitListener implements ServletContextListener {
     }
   }
 }
+*/
